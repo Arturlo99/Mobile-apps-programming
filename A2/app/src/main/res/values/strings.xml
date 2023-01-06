@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">A2</string>
+    <string name="cost_input">Enter order cost</string>
+    <string name="regular_tip_input">Regular tip percentage</string>
+    <string name="service_satisfaction_question">Are you satisfied from service?</string>
+    <string name="food_rating">How do you rate food quality?</string>
+    <string name="calculate_tip_button">Calculate tip</string>
+    <string name="total_order_cost">Total order cost</string>
+</resources>

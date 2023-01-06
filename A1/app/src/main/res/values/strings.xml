@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">A1</string>
-    <string name="editTextHint">Pick background (red, green, blue, white)</string>
-    <string name="exitBtnTxt">EXIT</string>
-    <string name="textViewTxt">spy box - try clicking HOME and BACK</string>
+    <string name="exit">EXIT</string>
+    <string name="textViewTxt">LIFECYCLE</string>
 </resources>
