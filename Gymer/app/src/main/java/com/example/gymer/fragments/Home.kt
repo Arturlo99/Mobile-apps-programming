@@ -1,4 +1,4 @@
-package com.example.gymer
+package com.example.gymer.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gymer.AppDatabase
+import com.example.gymer.TrainingAdapter
 import com.example.gymer.databinding.FragmentHomeBinding
 import com.example.gymer.entity.Training
-import java.time.LocalDate
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.util.ArrayList
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,8 +31,9 @@ class Home : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var trainings: ArrayList<Training>
+    private lateinit var trainings: List<Training>
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var db: AppDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,16 +44,16 @@ class Home : Fragment() {
         return binding.root
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+        db = AppDatabase.getDatabase(this.requireContext())
         binding.recyclerView.setHasFixedSize(true)
-        trainings = getTrainings()
-        binding.recyclerView.adapter = MyAdapter(trainings)
-
-//        binding.recyclerView.setVisibility(View.VISIBLE) //this hide/show recyclerview visibility
+        GlobalScope.launch {
+            trainings = db.trainingDao().getAll()
+            binding.recyclerView.adapter = TrainingAdapter(trainings as ArrayList<Training>)
+        }
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,11 +81,5 @@ class Home : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
-
-    private fun getTrainings(): ArrayList<Training> {
-        return arrayListOf(
-//            Training(1, LocalDate.now(), "abc",1, emptyList()),
-        )
     }
 }

@@ -15,9 +15,9 @@ import androidx.room.PrimaryKey
 )
 data class Exercise(
     @PrimaryKey(autoGenerate = true) val id: Int?,
-    val trainingId: Int,
-    val bodyPart: String?,
-    val series: Int?,
-    val repetitions: Int?,
-    val weight: Int?
+    var trainingId: Int,
+    var bodyPart: String?,
+    var series: Int?,
+    var repetitions: Int?,
+    var weight: Int?
 )
